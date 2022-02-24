@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useLogsStore } from "@/stores/logs";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/main";
@@ -8,6 +8,7 @@ import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.v
 import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
 
 const logs = useLogsStore();
+
 let userData = ref({});
 
 function loadData() {
@@ -26,7 +27,11 @@ onMounted(() => loadData());
 <template>
   <div class="home">
     <tamagotchi-choice class="choice" />
-    <tamagotchi-indicators class="indicators" />
+    <tamagotchi-indicators
+      v-if="userData.indicators"
+      :indicatorsData="userData.indicators"
+      class="indicators"
+    />
     <tamagotchi-info class="info" />
   </div>
 </template>

@@ -1,65 +1,70 @@
 <script setup>
-import { reactive } from "vue";
-// const lifeTime = {
-//   value: 0,
-//   speed: 5000,
-// };
-//
-// const experience = {
-//   value: 0,
-// };
+import { computed, reactive } from "vue";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../main";
+import { useLogsStore } from "../../stores/logs";
 
-const indicators = reactive({
-  happiness: {
-    title: "Счастье",
-    action: "Покормить",
-    value: 100,
-    speed: 1000,
-    increase: () => {
-      if (indicators.happiness.value < 100) {
-        indicators.happiness.value += 10;
-      }
-    },
-  },
-  purity: {
-    title: "Чистота",
-    action: "Помыть",
-    value: 100,
-    speed: 1000,
-    increase: () => {
-      if (indicators.purity.value < 100) {
-        indicators.purity.value += 10;
-      }
-    },
-  },
-  health: {
-    title: "Здоровье",
-    action: "Вылечить",
-    value: 100,
-    speed: 1000,
-    increase: () => {
-      if (indicators.health.value < 100) {
-        indicators.health.value += 10;
-      }
-    },
-  },
-  fatigue: {
-    title: "Усталось",
-    action: "Отправить спать",
-    value: 100,
-    speed: 1000,
-    increase: () => {
-      if (indicators.fatigue.value < 100) {
-        indicators.fatigue.value += 10;
-      }
-    },
+const logs = useLogsStore();
+
+let props = defineProps({
+  indicatorsData: {
+    type: Object,
+    required: true,
   },
 });
 
+const indicators = reactive({
+  happiness: {
+    name: "happiness",
+    title: "Счастье",
+    action: "Покормить",
+    value: computed(() => props.indicatorsData.happiness),
+    speed: 1000,
+  },
+  purity: {
+    name: "purity",
+    title: "Чистота",
+    action: "Помыть",
+    value: computed(() => props.indicatorsData.purity),
+    speed: 1000,
+  },
+  health: {
+    name: "health",
+    title: "Здоровье",
+    action: "Вылечить",
+    value: computed(() => props.indicatorsData.health),
+    speed: 1000,
+  },
+  fatigue: {
+    name: "fatigue",
+    title: "Усталось",
+    action: "Отправить спать",
+    value: computed(() => props.indicatorsData.fatigue),
+    speed: 1000,
+  },
+});
+
+function increase(indicator) {
+  if (
+    props.indicatorsData.hasOwnProperty(indicator) &&
+    props.indicatorsData[indicator] < 100
+  ) {
+    const temp = props.indicatorsData;
+    temp[indicator] += 10;
+    updateDoc(doc(db, "users", logs.uid), {
+      indicators: temp,
+    });
+  }
+}
+
 for (let indicator in indicators) {
   setInterval(() => {
-    if (indicators[indicator].value > 0) {
-      indicators[indicator].value -= 10;
+    if (props.indicatorsData[indicator] > 0) {
+      const temp = props.indicatorsData;
+      temp[indicator] -= 10;
+      updateDoc(doc(db, "users", logs.uid), {
+        indicators: temp,
+      });
     }
   }, indicators[indicator].speed);
 }
@@ -69,7 +74,7 @@ for (let indicator in indicators) {
   <div class="indicators">
     <div v-for="indicator in indicators" :key="indicator.title">
       <div class="i-a-a-content">
-        <button class="button button-eat" @click="indicator.increase">
+        <button class="button button-eat" @click="increase(indicator.name)">
           <img
             alt="Apple"
             class="picture-button"

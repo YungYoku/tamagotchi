@@ -50,18 +50,20 @@ export const useLogsStore = defineStore({
           this.uid = user.uid;
           localStorage.uid = user.uid;
           await setDoc(doc(db, "users", user.uid), {
-              name,
-              experience:0,
-              lifeTime:0,
-              happinessButton:0,
-              happiness:100,
-              purityButton:0,
-              purity:100,
-              healthButton:0,
-              health:100,
-              fatigueButton:0,
-              fatigue:100,
-              persChoice:0,
+            name,
+            experience: 0,
+            lifeTime: 0,
+            persChoice: 0,
+            indicators: {
+              happinessButton: 0,
+              happiness: 100,
+              purityButton: 0,
+              purity: 100,
+              healthButton: 0,
+              health: 100,
+              fatigueButton: 0,
+              fatigue: 100,
+            },
           });
           await router.push("/");
           loading.hide();
