@@ -3,6 +3,9 @@ import { onMounted, ref } from "vue";
 import { useLogsStore } from "@/stores/logs";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/main";
+import TamagotchiChoice from "@/components/tamagotchi/TamagotchiChoice.vue";
+import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.vue";
+import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
 
 const logs = useLogsStore();
 let userData = ref({});
@@ -21,7 +24,40 @@ onMounted(() => loadData());
 </script>
 
 <template>
-  <div></div>
+  <div class="home">
+    <tamagotchi-choice class="choice" />
+    <tamagotchi-indicators class="indicators" />
+    <tamagotchi-info class="info" />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.home {
+  display: grid;
+  grid-template: 80vh 20vh / 2fr 1fr;
+  grid-template-areas:
+    "character actions"
+    "panel panel";
+  width: 100%;
+  height: 100vh;
+}
+
+.choice {
+  grid-area: character;
+}
+
+.indicators {
+  grid-area: actions;
+}
+
+.info {
+  grid-area: panel;
+}
+
+.choice,
+.indicators,
+.info {
+  width: 100%;
+  height: 100%;
+}
+</style>
