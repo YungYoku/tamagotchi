@@ -56,6 +56,22 @@ const indicators = reactive({
   },
 });
 
+function getDate() {
+  return (
+    new Date().getUTCFullYear() +
+    "." +
+    (new Date().getUTCMonth() + 1) +
+    "." +
+    new Date().getUTCDate() +
+    "." +
+    new Date().getUTCHours() +
+    "." +
+    new Date().getUTCMinutes() +
+    "." +
+    new Date().getUTCSeconds()
+  );
+}
+
 function increase(indicator) {
   if (
     props.indicatorsData.hasOwnProperty(indicator) &&
@@ -64,6 +80,7 @@ function increase(indicator) {
     const temp = props.indicatorsData;
     temp[indicator].value += indicators[indicator].power;
     if (temp[indicator].value > 100) temp[indicator].value = 100;
+    temp[indicator].lastIncrease = getDate();
 
     const experience = props.experience + indicators[indicator].exp;
 
