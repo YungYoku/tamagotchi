@@ -96,6 +96,8 @@ for (let indicator in indicators) {
     if (props.indicatorsData[indicator].value > 0) {
       const temp = props.indicatorsData;
       temp[indicator].value -= 10;
+      if (temp[indicator].value < 0) temp[indicator].value = 0;
+
       updateDoc(doc(db, "users", logs.uid), {
         indicators: temp,
       });
