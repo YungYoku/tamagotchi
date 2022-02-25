@@ -32,7 +32,7 @@ let experience = computed(() => {
 
 <template>
   <div class="data-panel">
-    <p>Время жизни: 0 дней</p>
+    <p>Время жизни: 0 часов</p>
     <p>Уровень питомца: {{ experience.level }}</p>
     <p>Опыт питомца: {{ experience.value }} / {{ experience.limit }}</p>
   </div>
