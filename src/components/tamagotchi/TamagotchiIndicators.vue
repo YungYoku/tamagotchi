@@ -7,6 +7,10 @@ import { useLogsStore } from "../../stores/logs";
 const logs = useLogsStore();
 
 let props = defineProps({
+  experience: {
+    type: Number,
+    required: true,
+  },
   indicatorsData: {
     type: Object,
     required: true,
@@ -19,28 +23,36 @@ const indicators = reactive({
     title: "Счастье",
     action: "Покормить",
     value: computed(() => props.indicatorsData.happiness),
-    speed: 1000,
+    power: 7,
+    speed: 20000,
+    exp: 5,
   },
   purity: {
     name: "purity",
     title: "Чистота",
     action: "Помыть",
     value: computed(() => props.indicatorsData.purity),
-    speed: 1000,
+    power: 7,
+    speed: 40000,
+    exp: 5,
   },
   health: {
     name: "health",
     title: "Здоровье",
     action: "Вылечить",
     value: computed(() => props.indicatorsData.health),
-    speed: 1000,
+    power: 10,
+    speed: 30000,
+    exp: 10,
   },
   fatigue: {
     name: "fatigue",
     title: "Усталось",
     action: "Отправить спать",
     value: computed(() => props.indicatorsData.fatigue),
-    speed: 1000,
+    power: 90,
+    speed: 60000,
+    exp: 15,
   },
 });
 
@@ -50,8 +62,11 @@ function increase(indicator) {
     props.indicatorsData[indicator] < 100
   ) {
     const temp = props.indicatorsData;
-    temp[indicator] += 10;
+    const experience = props.experience + indicators[indicator].exp;
+    temp[indicator] += indicators[indicator].power;
+    if (temp[indicator] > 100) temp[indicator] = 100;
     updateDoc(doc(db, "users", logs.uid), {
+      experience,
       indicators: temp,
     });
   }

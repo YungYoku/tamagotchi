@@ -1,16 +1,31 @@
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+
+let props = defineProps({
+  experience: {
+    type: Number,
+    required: true,
+  },
+});
+
+let level = computed(() => {
+  return 0;
+});
+</script>
 
 <template>
   <div class="data-panel">
-    <div class="time-of-life">Время жизни: 0 дней</div>
-    <div class="pet-experience">Опыт питомца: 0</div>
+    <p>Время жизни: 0 дней</p>
+    <p>Уровень питомца: {{ level }}</p>
+    <p>Опыт питомца: {{ props.experience }} / 100</p>
   </div>
 </template>
 
 <style scoped>
-.time-of-life,
-.pet-experience {
-  padding: 15px 10px;
-  margin: 10px 40px 10px 200px;
+.data-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 </style>

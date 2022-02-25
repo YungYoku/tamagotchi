@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useLogsStore } from "@/stores/logs";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/main";
@@ -29,10 +29,11 @@ onMounted(() => loadData());
     <tamagotchi-choice class="choice" />
     <tamagotchi-indicators
       v-if="userData.indicators"
+      :experience="userData.experience"
       :indicatorsData="userData.indicators"
       class="indicators"
     />
-    <tamagotchi-info class="info" />
+    <tamagotchi-info :experience="userData.experience" class="info" />
   </div>
 </template>
 
@@ -45,6 +46,7 @@ onMounted(() => loadData());
     "panel panel";
   width: 100%;
   height: 100vh;
+  padding: 0 20px;
 }
 
 .choice {
