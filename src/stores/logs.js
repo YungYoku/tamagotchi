@@ -55,14 +55,22 @@ export const useLogsStore = defineStore({
             lifeTime: 0,
             persChoice: 0,
             indicators: {
-              happinessButton: 0,
-              happiness: 100,
-              purityButton: 0,
-              purity: 100,
-              healthButton: 0,
-              health: 100,
-              fatigueButton: 0,
-              fatigue: 100,
+              happiness: {
+                value: 100,
+                lastIncrease: 0,
+              },
+              purity: {
+                value: 100,
+                lastIncrease: 0,
+              },
+              health: {
+                value: 100,
+                lastIncrease: 0,
+              },
+              fatigue: {
+                value: 100,
+                lastIncrease: 0,
+              },
             },
           });
           await router.push("/");

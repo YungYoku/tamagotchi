@@ -6,16 +6,20 @@ import { db } from "@/main";
 import TamagotchiChoice from "@/components/tamagotchi/TamagotchiChoice.vue";
 import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.vue";
 import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
+import { useLoadingStore } from "../stores/loading";
 
+const loading = useLoadingStore();
 const logs = useLogsStore();
 
 let userData = ref({});
 
 function loadData() {
   if (logs.uid) {
+    loading.show();
     onSnapshot(doc(db, "users", logs.uid), (data) => {
       if (data.exists()) {
         userData.value = data.data();
+        loading.hide();
       }
     });
   }

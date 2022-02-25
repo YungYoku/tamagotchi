@@ -22,7 +22,7 @@ const indicators = reactive({
     name: "happiness",
     title: "Счастье",
     action: "Покормить",
-    value: computed(() => props.indicatorsData.happiness),
+    value: computed(() => props.indicatorsData.happiness.value),
     power: 7,
     speed: 20000,
     exp: 5,
@@ -31,7 +31,7 @@ const indicators = reactive({
     name: "purity",
     title: "Чистота",
     action: "Помыть",
-    value: computed(() => props.indicatorsData.purity),
+    value: computed(() => props.indicatorsData.purity.value),
     power: 7,
     speed: 40000,
     exp: 5,
@@ -40,7 +40,7 @@ const indicators = reactive({
     name: "health",
     title: "Здоровье",
     action: "Вылечить",
-    value: computed(() => props.indicatorsData.health),
+    value: computed(() => props.indicatorsData.health.value),
     power: 10,
     speed: 30000,
     exp: 10,
@@ -49,7 +49,7 @@ const indicators = reactive({
     name: "fatigue",
     title: "Усталось",
     action: "Отправить спать",
-    value: computed(() => props.indicatorsData.fatigue),
+    value: computed(() => props.indicatorsData.fatigue.value),
     power: 90,
     speed: 60000,
     exp: 15,
@@ -59,12 +59,14 @@ const indicators = reactive({
 function increase(indicator) {
   if (
     props.indicatorsData.hasOwnProperty(indicator) &&
-    props.indicatorsData[indicator] < 100
+    props.indicatorsData[indicator].value < 100
   ) {
     const temp = props.indicatorsData;
+    temp[indicator].value += indicators[indicator].power;
+    if (temp[indicator].value > 100) temp[indicator].value = 100;
+
     const experience = props.experience + indicators[indicator].exp;
-    temp[indicator] += indicators[indicator].power;
-    if (temp[indicator] > 100) temp[indicator] = 100;
+
     updateDoc(doc(db, "users", logs.uid), {
       experience,
       indicators: temp,
@@ -74,9 +76,9 @@ function increase(indicator) {
 
 for (let indicator in indicators) {
   setInterval(() => {
-    if (props.indicatorsData[indicator] > 0) {
+    if (props.indicatorsData[indicator].value > 0) {
       const temp = props.indicatorsData;
-      temp[indicator] -= 10;
+      temp[indicator].value -= 10;
       updateDoc(doc(db, "users", logs.uid), {
         indicators: temp,
       });
