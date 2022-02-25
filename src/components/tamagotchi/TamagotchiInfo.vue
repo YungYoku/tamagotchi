@@ -8,16 +8,33 @@ let props = defineProps({
   },
 });
 
-let level = computed(() => {
-  return 0;
+let experience = computed(() => {
+  let limit = 100;
+  let level = 0;
+  let _experience = props.experience;
+
+  while (_experience > limit) {
+    level++;
+    _experience -= limit;
+    limit *= 1.1;
+  }
+
+  _experience = Math.floor(_experience);
+  limit = Math.floor(limit);
+
+  return {
+    level,
+    value: _experience,
+    limit,
+  };
 });
 </script>
 
 <template>
   <div class="data-panel">
     <p>Время жизни: 0 дней</p>
-    <p>Уровень питомца: {{ level }}</p>
-    <p>Опыт питомца: {{ props.experience }} / 100</p>
+    <p>Уровень питомца: {{ experience.level }}</p>
+    <p>Опыт питомца: {{ experience.value }} / {{ experience.limit }}</p>
   </div>
 </template>
 

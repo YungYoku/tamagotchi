@@ -47,6 +47,7 @@ onMounted(() => loadData());
   width: 100%;
   height: 100vh;
   padding: 0 20px;
+  user-select: none;
 }
 
 .choice {
