@@ -40,6 +40,7 @@ let experience = computed(() => {
 
 <style scoped>
 .data-panel {
+  background-color: rgb(200,191,231);
   display: flex;
   align-items: center;
   justify-content: center;

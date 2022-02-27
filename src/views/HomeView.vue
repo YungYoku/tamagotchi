@@ -43,11 +43,12 @@ onMounted(() => loadData());
 
 <style scoped>
 .home {
+  background-color: rgb(153,217,234);
   display: grid;
-  grid-template: 80vh 20vh / 2fr 1fr;
   grid-template-areas:
-    "character actions"
-    "panel panel";
+    "actions"
+    "character"
+    "panel";
   width: 100%;
   height: 100vh;
   padding: 0 20px;

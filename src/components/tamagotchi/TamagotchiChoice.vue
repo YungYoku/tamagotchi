@@ -13,13 +13,13 @@ const modules = [Navigation];
   <Swiper :modules="modules" :navigation="true" class="mySwiper">
     <SwiperSlide>
       <div>
-        <img alt="Собака" src="@/assets/img/dog.png" />
+        <img alt="Собака" src="@/assets/img/dog2.png" />
       </div>
     </SwiperSlide>
 
     <SwiperSlide>
       <div>
-        <img alt="Кошка" src="@/assets/img/cat.png" />
+        <img alt="Кошка" src="@/assets/img/cat2.png" />
       </div>
     </SwiperSlide>
 
@@ -41,7 +41,6 @@ const modules = [Navigation];
   text-align: center;
   font-size: 18px;
   background: transparent;
-
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -61,5 +60,6 @@ const modules = [Navigation];
   width: 100%;
   height: 100%;
   object-fit: cover;
+
 }
 </style>
