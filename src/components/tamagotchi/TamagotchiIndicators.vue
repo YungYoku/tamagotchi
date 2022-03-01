@@ -18,16 +18,15 @@ let props = defineProps({
 });
 
 const indicators = reactive({
-
   happiness: {
     // experience: {
-//   name: "fatigue",
-//       title: "Опыт питомца:",
-//       value: computed(() => props.experience),
-//       power: 0,
-//       speed: 0,
-//       exp: 0,
-// },
+    //   name: "fatigue",
+    //       title: "Опыт питомца:",
+    //       value: computed(() => props.experience),
+    //       power: 0,
+    //       speed: 0,
+    //       exp: 0,
+    // },
     name: "happiness",
     title: "Счастье",
     action: "Покормить",
@@ -115,63 +114,51 @@ for (let indicator in indicators) {
 }
 </script>
 
-
 <template>
-
-    <div class="indicators">
-      <div class="text-and-progress">
-        <p>Опыт питомца</p>
-        <progress class="" value="" max=""></progress>
-      </div>
-      <div v-for="indicator in indicators" :key="indicator.title">
-        <div class="text-and-progress">
-          <p>{{ indicator.title }}</p>
-          <progress
-            :value="indicator.value"
-            :class="indicator.name"
-            max="100"
-          ></progress>
-        </div>
-      </div>
+  <div class="indicators">
+    <div class="text-and-progress">
+      <p>Опыт питомца</p>
+      <progress class="" max="" value=""></progress>
     </div>
 
+    <div class="stats">
+      <div
+        v-for="indicator in indicators"
+        :key="indicator.title"
+        class="text-and-progress"
+      >
+        <p>{{ indicator.title }}</p>
+        <progress
+          :class="indicator.name"
+          :value="indicator.value"
+          max="100"
+        ></progress>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.indicators > div {
-  border: 1px solid violet;
-  display: inline-block;
+.indicators {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(112, 146, 190);
+  padding: 10px 5%;
+}
+
+.stats {
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-}
-.indicators {
-  border: 1px solid red;
-  display: flex;
-    justify-content: space-between;
-  background-color: rgb(112,146,190);
-
 }
 
-.indicators{
-  padding: 0 15%;
-}
-
-.indicators > div:first-child{
-  margin-right: 25%;
-}
-
-.indicators-all {
-  border: 2px solid green;
-}
-/*.indicators, .text-and-progress {*/
-/*  margin-left: 50px;*/
-/*}*/
 .text-and-progress {
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  margin-right: 20px;
 }
 
 .button-eat {

@@ -1,31 +1,49 @@
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
+import dog from "@/assets/img/dog2.png";
+import cat from "@/assets/img/cat2.png";
+import mouse from "@/assets/img/mouse.png";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../main";
+import { useLogsStore } from "../../stores/logs";
 
 const modules = [Navigation];
+
+const logs = useLogsStore();
+
+const tamagotchis = [
+  {
+    src: dog,
+    alt: "Собака",
+  },
+  {
+    src: cat,
+    alt: "Кошка",
+  },
+  {
+    src: mouse,
+    alt: "Мышь",
+  },
+];
+
+function pick(i) {
+  updateDoc(doc(db, "users", logs.uid), {
+    persChoice: i,
+  });
+}
 </script>
 
 <template>
   <Swiper :modules="modules" :navigation="true" class="mySwiper">
-    <SwiperSlide>
+    <SwiperSlide v-for="(tamagotchi, i) in tamagotchis" :key="tamagotchi.alt">
       <div>
-        <img alt="Собака" src="@/assets/img/dog2.png" />
-      </div>
-    </SwiperSlide>
-
-    <SwiperSlide>
-      <div>
-        <img alt="Кошка" src="@/assets/img/cat2.png" />
-      </div>
-    </SwiperSlide>
-
-    <SwiperSlide>
-      <div>
-        <img alt="Мышь" src="@/assets/img/mouse.png" />
+        <img :alt="tamagotchi.alt" :src="tamagotchi.src" class="tamagotchi" />
+        <button class="pick" @click="pick(i)">Выбрать</button>
       </div>
     </SwiperSlide>
   </Swiper>
@@ -34,7 +52,7 @@ const modules = [Navigation];
 <style scoped>
 .swiper {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .swiper-slide {
@@ -60,6 +78,17 @@ const modules = [Navigation];
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
 
+.tamagotchi {
+}
+
+.pick {
+  position: relative;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #007aff;
+  margin-top: 40px;
+  z-index: 3;
 }
 </style>

@@ -40,10 +40,12 @@ let experience = computed(() => {
 
 <style scoped>
 .data-panel {
-  background-color: rgb(200,191,231);
+  height: 80px;
+  background-color: rgb(200, 191, 231);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
 }
 </style>

@@ -6,6 +6,7 @@ import { db } from "@/main";
 import TamagotchiChoice from "@/components/tamagotchi/TamagotchiChoice.vue";
 import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.vue";
 import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
+import TamagotchiPerson from "@/components/tamagotchi/TamagotchiPerson.vue";
 import { useLoadingStore } from "../stores/loading";
 
 const loading = useLoadingStore();
@@ -30,47 +31,36 @@ onMounted(() => loadData());
 
 <template>
   <div class="home">
-    <tamagotchi-choice class="choice" />
     <tamagotchi-indicators
-      v-if="userData.indicators"
+      v-if="userData.persChoice && userData.indicators"
       :experience="userData.experience"
       :indicatorsData="userData.indicators"
       class="indicators"
     />
-    <tamagotchi-info :experience="userData.experience" class="info" />
+
+    <tamagotchi-person
+      v-if="userData.persChoice"
+      :index="userData.persChoice"
+      class="person"
+    />
+
+    <tamagotchi-choice v-if="!userData.persChoice" class="choice" />
+
+    <tamagotchi-info
+      v-if="userData.persChoice"
+      :experience="userData.experience"
+      class="info"
+    />
   </div>
 </template>
 
 <style scoped>
 .home {
-  background-color: rgb(153,217,234);
+  background-color: rgb(153, 217, 234);
   display: grid;
-  grid-template-areas:
-    "actions"
-    "character"
-    "panel";
+  grid-template: 80px auto 80px / 1fr;
   width: 100%;
   height: 100vh;
-  padding: 0 20px;
   user-select: none;
-}
-
-.choice {
-  grid-area: character;
-}
-
-.indicators {
-  grid-area: actions;
-}
-
-.info {
-  grid-area: panel;
-}
-
-.choice,
-.indicators,
-.info {
-  width: 100%;
-  height: 100%;
 }
 </style>
