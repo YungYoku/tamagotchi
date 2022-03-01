@@ -29,8 +29,8 @@ const tamagotchis = [
 <template>
   <div>
     <img
-      :alt="tamagotchis[props.index].alt"
-      :src="tamagotchis[props.index].src"
+      :alt="tamagotchis[props.index - 1].alt"
+      :src="tamagotchis[props.index - 1].src"
     />
   </div>
 </template>

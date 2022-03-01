@@ -43,7 +43,7 @@ function pick(i) {
     <SwiperSlide v-for="(tamagotchi, i) in tamagotchis" :key="tamagotchi.alt">
       <div>
         <img :alt="tamagotchi.alt" :src="tamagotchi.src" class="tamagotchi" />
-        <button class="pick" @click="pick(i)">Выбрать</button>
+        <button class="pick" @click="pick(i + 1)">Выбрать</button>
       </div>
     </SwiperSlide>
   </Swiper>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { useLogsStore } from "@/stores/logs";
 
@@ -8,21 +8,13 @@ const form = reactive({
   email: "",
   pass: "",
   passRep: "",
-  rules: false,
   isValid() {
-    return (
-      this.pass === this.passRep &&
-      this.pass.length >= 6 &&
-      this.email &&
-      this.rules
-    );
+    return this.pass === this.passRep && this.pass.length >= 6 && this.email;
   },
 });
+
 const passDom = ref();
 const passRepDom = ref();
-const lineI = ref();
-const lineII = ref();
-const lineIII = ref();
 
 const colors = {
   main: "#9966cc",
@@ -32,27 +24,6 @@ const colors = {
 };
 
 function changeComplexity() {
-  if (form.pass.length >= 6 && form.passRep.length >= 6) {
-    lineI.value.style.backgroundColor = colors.main;
-  } else {
-    lineI.value.style.backgroundColor = colors.additional;
-    lineII.value.style.backgroundColor = colors.additional;
-    lineIII.value.style.backgroundColor = colors.additional;
-  }
-
-  if (form.pass.length >= 10 && form.passRep.length >= 10) {
-    lineII.value.style.backgroundColor = colors.main;
-  } else {
-    lineII.value.style.backgroundColor = colors.additional;
-    lineIII.value.style.backgroundColor = colors.additional;
-  }
-
-  if (form.pass.length >= 14 && form.passRep.length >= 14) {
-    lineIII.value.style.backgroundColor = colors.main;
-  } else {
-    lineIII.value.style.backgroundColor = colors.additional;
-  }
-
   checkPass();
 }
 
@@ -85,44 +56,33 @@ async function register() {
 
     <form @submit.prevent="register">
       <input
-        type="text"
-        placeholder="Почта"
-        class="email inputLine"
         v-model.trim="form.email"
+        class="email inputLine"
+        placeholder="Почта"
+        type="text"
       />
 
       <input
-        type="password"
-        placeholder="Пароль"
-        class="pass inputLine"
         ref="passDom"
         v-model.trim="form.pass"
+        class="pass inputLine"
+        placeholder="Пароль"
+        type="password"
         @keyup="changeComplexity"
       />
 
       <input
-        type="password"
-        placeholder="Повторите пароль"
-        class="passRep inputLine"
         ref="passRepDom"
         v-model.trim="form.passRep"
+        class="passRep inputLine"
+        placeholder="Повторите пароль"
+        type="password"
         @keyup="changeComplexity"
       />
 
-      <div class="passComplexity">
-        <span class="passComplexity__line" ref="lineI"></span>
-        <span class="passComplexity__line" ref="lineII"></span>
-        <span class="passComplexity__line" ref="lineIII"></span>
-      </div>
+      <button class="submitBtn" type="submit">Отправить</button>
 
-      <label class="rules">
-        <input type="checkbox" v-model="form.rules" />
-        Я соглсаен с правилами.
-      </label>
-
-      <button type="submit" class="submitBtn">Отправить</button>
-
-      <router-link to="/login" class="swapMode">
+      <router-link class="swapMode" to="/login">
         <h5>ЛОГИН</h5>
       </router-link>
     </form>
@@ -151,7 +111,7 @@ form {
   color: var(--color-text);
   box-shadow: 0 0 10px 1px var(--color-shadow);
   display: grid;
-  grid-template: 50px 50px 50px 40px 20px 90px 10px / 1fr;
+  grid-template: 50px 50px 50px 90px 10px / 1fr;
 }
 
 h2 {
@@ -177,23 +137,6 @@ h2 {
 .passRep:focus {
   border-bottom: 2px solid #9966cc;
   transition: all 0.02s;
-}
-
-.passComplexity {
-  display: grid;
-  grid-template: 5px / 1fr 1fr 1fr;
-  grid-gap: 5%;
-}
-
-.passComplexity__line {
-  width: 100%;
-  height: 5px;
-  background-color: #d3d3d3;
-  transition: all 0.5s;
-}
-
-.rules input {
-  cursor: pointer;
 }
 
 .submitBtn {

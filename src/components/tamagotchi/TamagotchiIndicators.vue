@@ -17,6 +17,27 @@ let props = defineProps({
   },
 });
 
+let experience = computed(() => {
+  let limit = 100;
+  let level = 0;
+  let _experience = props.experience;
+
+  while (_experience > limit) {
+    level++;
+    _experience -= limit;
+    limit *= 1.1;
+  }
+
+  _experience = Math.floor(_experience);
+  limit = Math.floor(limit);
+
+  return {
+    level,
+    value: _experience,
+    limit,
+  };
+});
+
 const indicators = reactive({
   happiness: {
     // experience: {
@@ -118,7 +139,11 @@ for (let indicator in indicators) {
   <div class="indicators">
     <div class="text-and-progress">
       <p>Опыт питомца</p>
-      <progress class="" max="" value=""></progress>
+      <progress
+        :max="experience.limit"
+        :value="experience.value"
+        class=""
+      ></progress>
     </div>
 
     <div class="stats">
