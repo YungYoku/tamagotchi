@@ -99,10 +99,12 @@ const actions = [
       <div v-for="(options, i) in actions" :key="options[0].alt + i">
         <button v-for="action in options" :key="action.alt">
           <img :alt="action.alt" :src="action.src" />
+          <p> {{action.alt}}</p>
         </button>
       </div>
     </div>
   </div>
+
 </template>
 
 <style scoped>
@@ -113,9 +115,7 @@ const actions = [
   flex-direction: column;
 }
 
-.person img {
-  margin-bottom: 60px;
-}
+
 
 .actions {
   display: flex;
@@ -123,17 +123,21 @@ const actions = [
   justify-content: center;
 }
 
+.actions >p {
+  margin: 0px;
+}
+
 .actions > div {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 20px;
+  margin: 0 50px;
 }
 
 .actions > div button {
   width: 60px;
   height: 60px;
-  margin: 0 5px;
+  margin: 0 15px;
 }
 
 .actions > div button img {
