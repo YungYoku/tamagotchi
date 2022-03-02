@@ -3,6 +3,14 @@ import dog from "@/assets/img/dog2.png";
 import cat from "@/assets/img/cat2.png";
 import mouse from "@/assets/img/mouse.png";
 import heal from "@/assets/img/heal.png";
+import kfc from "@/assets/img/kfc.png";
+import egg from "@/assets/img/egg.png";
+import soup from "@/assets/img/soup.png";
+import shampoo from "@/assets/img/shampoo.png";
+import sponge from "@/assets/img/sponge.png";
+import mask from "@/assets/img/mask.png";
+import bed from "@/assets/img/bed.png";
+import ball from "@/assets/img/ball.png";
 
 const props = defineProps({
   index: {
@@ -27,42 +35,56 @@ const tamagotchis = [
 ];
 
 const actions = [
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
-  {
-    src: heal,
-    alt: "Лечение",
-  },
+  [
+    {
+      src: ball,
+      alt: "Мяч",
+    },
+  ],
+
+  [
+    {
+      src: kfc,
+      alt: "KFC",
+    },
+    {
+      src: egg,
+      alt: "Яичница",
+    },
+    {
+      src: soup,
+      alt: "Борщ",
+    },
+  ],
+
+  [
+    {
+      src: shampoo,
+      alt: "Шампунь",
+    },
+    {
+      src: sponge,
+      alt: "Мочалка",
+    },
+    {
+      src: mask,
+      alt: "Маска для лица",
+    },
+  ],
+
+  [
+    {
+      src: heal,
+      alt: "Лечение",
+    },
+  ],
+
+  [
+    {
+      src: bed,
+      alt: "Сон",
+    },
+  ],
 ];
 </script>
 
@@ -74,9 +96,11 @@ const actions = [
     />
 
     <div class="actions">
-      <button v-for="action in actions" :key="action.alt">
-        <img :alt="action.alt" :src="action.src" />
-      </button>
+      <div v-for="(options, i) in actions" :key="options[0].alt + i">
+        <button v-for="action in options" :key="action.alt">
+          <img :alt="action.alt" :src="action.src" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -99,13 +123,20 @@ const actions = [
   justify-content: center;
 }
 
-.actions button {
+.actions > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+}
+
+.actions > div button {
   width: 60px;
   height: 60px;
   margin: 0 5px;
 }
 
-.actions button img {
+.actions > div button img {
   width: 60px;
   height: 60px;
 }

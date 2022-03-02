@@ -40,18 +40,19 @@ let experience = computed(() => {
 
 const indicators = reactive({
   happiness: {
-    // experience: {
-    //   name: "fatigue",
-    //       title: "Опыт питомца:",
-    //       value: computed(() => props.experience),
-    //       power: 0,
-    //       speed: 0,
-    //       exp: 0,
-    // },
     name: "happiness",
     title: "Счастье",
-    action: "Покормить",
+    action: "Поиграть",
     value: computed(() => props.indicatorsData.happiness.value),
+    power: 7,
+    speed: 20000,
+    exp: 5,
+  },
+  hunger: {
+    name: "hunger",
+    title: "Голод",
+    action: "Покормить",
+    value: computed(() => props.indicatorsData.hunger.value),
     power: 7,
     speed: 20000,
     exp: 5,

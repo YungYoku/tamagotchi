@@ -59,6 +59,10 @@ export const useLogsStore = defineStore({
                 value: 100,
                 lastIncrease: 0,
               },
+              hunger: {
+                value: 100,
+                lastIncrease: 0,
+              },
               purity: {
                 value: 100,
                 lastIncrease: 0,
