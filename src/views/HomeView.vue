@@ -40,7 +40,9 @@ onMounted(() => loadData());
 
     <tamagotchi-person
       v-if="userData.persChoice"
+      :experience="userData.experience"
       :index="userData.persChoice"
+      :indicatorsData="userData.indicators"
       class="person"
     />
 
