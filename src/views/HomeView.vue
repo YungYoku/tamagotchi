@@ -58,7 +58,7 @@ onMounted(() => loadData());
 .home {
   background-color: rgb(153, 217, 234);
   display: grid;
-  grid-template: 80px auto 80px / 1fr;
+  grid-template: 80px auto 40px / 1fr;
   width: 100%;
   height: 100vh;
   user-select: none;

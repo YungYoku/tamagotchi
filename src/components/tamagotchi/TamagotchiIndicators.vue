@@ -137,13 +137,16 @@ for (let indicator in indicators) {
 
 <template>
   <div class="indicators">
-    <div class="text-and-progress">
-      <p>Опыт питомца</p>
-      <progress
-        :max="experience.limit"
-        :value="experience.value"
-        class=""
-      ></progress>
+    <div class="level-wrap">
+      <div class="level">{{ experience.level }}</div>
+      <div class="text-and-progress">
+        <p>Опыт питомца</p>
+        <progress
+          :max="experience.limit"
+          :value="experience.value"
+          class=""
+        ></progress>
+      </div>
     </div>
 
     <div class="stats">
@@ -165,12 +168,31 @@ for (let indicator in indicators) {
 
 <style scoped>
 .indicators {
-  height: 80px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(112, 146, 190);
   padding: 10px 5%;
+}
+
+.level-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.level {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid white;
+  margin-right: 20px;
 }
 
 .stats {

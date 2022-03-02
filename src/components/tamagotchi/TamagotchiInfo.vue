@@ -33,13 +33,12 @@ let experience = computed(() => {
 <template>
   <div class="data-panel">
     <p>Время жизни: 0 часов</p>
-    <p>Уровень питомца: {{ experience.level }}</p>
   </div>
 </template>
 
 <style scoped>
 .data-panel {
-  height: 80px;
+  height: 100%;
   background-color: rgb(200, 191, 231);
   display: flex;
   align-items: center;
