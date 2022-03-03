@@ -56,7 +56,6 @@ export const useLogsStore = defineStore({
           await setDoc(doc(db, "users", user.uid), {
             name,
             experience: 0,
-            lifeTime: 0,
             persChoice: 0,
             indicators: {
               happiness: {
