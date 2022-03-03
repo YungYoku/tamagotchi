@@ -21,6 +21,7 @@ export function getAmountOfDaysFromYearStart() {
   for (let i = 0; i < new Date().getMonth(); i++) {
     days += months[i];
   }
+  days += new Date().getDate();
   return days;
 }
 

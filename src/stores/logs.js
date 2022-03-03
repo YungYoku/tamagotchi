@@ -81,6 +81,7 @@ export const useLogsStore = defineStore({
             },
             regDate: getAmountOfHoursFromYearStart(),
             lastLogin: getAmountOfDaysFromYearStart(),
+            coins: 0,
           });
           await router.push("/");
           loading.hide();

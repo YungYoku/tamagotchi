@@ -1,27 +1,42 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useLogsStore } from "@/stores/logs";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "@/main";
 import TamagotchiChoice from "@/components/tamagotchi/TamagotchiChoice.vue";
 import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.vue";
 import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
 import TamagotchiPerson from "@/components/tamagotchi/TamagotchiPerson.vue";
 import { useLoadingStore } from "@/stores/loading";
+import { getAmountOfDaysFromYearStart } from "@/js/api";
 
 const loading = useLoadingStore();
 const logs = useLogsStore();
 
 let userData = ref({});
 
+function createEverydayPrize() {
+  if (getAmountOfDaysFromYearStart() > userData.value.lastLogin) {
+    updateDoc(doc(db, "users", logs.uid), {
+      experience: userData.value.experience + 20,
+      lastLogin: getAmountOfDaysFromYearStart(),
+    });
+  }
+}
+
 function loadData() {
   if (logs.uid) {
     loading.show();
-    onSnapshot(doc(db, "users", logs.uid), (data) => {
-      if (data.exists()) {
-        userData.value = data.data();
-        loading.hide();
-      }
+    new Promise((resolve) => {
+      onSnapshot(doc(db, "users", logs.uid), (data) => {
+        if (data.exists()) {
+          userData.value = data.data();
+          loading.hide();
+          resolve();
+        }
+      });
+    }).then(() => {
+      createEverydayPrize();
     });
   }
 }
