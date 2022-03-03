@@ -75,21 +75,40 @@ const indicators = reactive({
   },
 });
 
+function decreaseIndicator(indicator) {
+  const temp = props.indicatorsData;
+  temp[indicator].value -= indicators[indicator].decrease;
+  if (temp[indicator].value < 0) temp[indicator].value = 0;
+
+  updateDoc(doc(db, "users", logs.uid), {
+    indicators: temp,
+  });
+}
+
 for (let indicator in indicators) {
   setInterval(() => {
     if (props.indicatorsData[indicator].value > 0) {
-      const temp = props.indicatorsData;
-      temp[indicator].value -= indicators[indicator].decrease;
-      if (temp[indicator].value < 0) temp[indicator].value = 0;
+      let flag = false;
+      if (indicator === "health") {
+        for (let indicator in props.indicatorsData) {
+          if (
+            props.indicatorsData[indicator].value < 50 &&
+            indicator !== "health"
+          ) {
+            flag = true;
+            break;
+          }
+        }
 
-      updateDoc(doc(db, "users", logs.uid), {
-        indicators: temp,
-      });
+        if (flag) {
+          decreaseIndicator(indicator);
+        }
+      } else {
+        decreaseIndicator(indicator);
+      }
     }
   }, indicators[indicator].speed);
 }
-
-//Health -- when only one <50%
 </script>
 
 <template>

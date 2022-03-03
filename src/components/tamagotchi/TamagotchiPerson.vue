@@ -14,6 +14,7 @@ import ball from "@/assets/img/ball.png";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/main";
 import { useLogsStore } from "@/stores/logs";
+import { getCurrentDate } from "@/js/api";
 
 const logs = useLogsStore();
 
@@ -47,22 +48,6 @@ const tamagotchis = [
   },
 ];
 
-function getDate() {
-  return (
-    new Date().getUTCFullYear() +
-    "." +
-    (new Date().getUTCMonth() + 1) +
-    "." +
-    new Date().getUTCDate() +
-    "." +
-    new Date().getUTCHours() +
-    "." +
-    new Date().getUTCMinutes() +
-    "." +
-    new Date().getUTCSeconds()
-  );
-}
-
 function increase(indicator, value, exp) {
   if (
     props.indicatorsData.hasOwnProperty(indicator) &&
@@ -71,7 +56,7 @@ function increase(indicator, value, exp) {
     const temp = props.indicatorsData;
     temp[indicator].value += value;
     if (temp[indicator].value > 100) temp[indicator].value = 100;
-    temp[indicator].lastIncrease = getDate();
+    temp[indicator].lastIncrease = getCurrentDate();
 
     const experience = props.experience + exp;
 
