@@ -11,7 +11,6 @@ import sponge from "@/assets/img/sponge.png";
 import mask from "@/assets/img/mask.png";
 import bed from "@/assets/img/bed.png";
 import ball from "@/assets/img/ball.png";
-import { computed, reactive } from "vue";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../main";
 import { useLogsStore } from "../../stores/logs";
@@ -64,17 +63,17 @@ function getDate() {
   );
 }
 
-function increase(indicator) {
+function increase(indicator, value, exp) {
   if (
     props.indicatorsData.hasOwnProperty(indicator) &&
     props.indicatorsData[indicator].value < 100
   ) {
     const temp = props.indicatorsData;
-    temp[indicator].value += indicators[indicator].power;
+    temp[indicator].value += value;
     if (temp[indicator].value > 100) temp[indicator].value = 100;
     temp[indicator].lastIncrease = getDate();
 
-    const experience = props.experience + indicators[indicator].exp;
+    const experience = props.experience + exp;
 
     updateDoc(doc(db, "users", logs.uid), {
       experience,
@@ -83,40 +82,12 @@ function increase(indicator) {
   }
 }
 
-const indicators = reactive({
-  happiness: {
-    value: computed(() => props.indicatorsData.happiness.value),
-    power: 7,
-    exp: 5,
-  },
-  hunger: {
-    value: computed(() => props.indicatorsData.hunger.value),
-    power: 7,
-    exp: 5,
-  },
-  purity: {
-    value: computed(() => props.indicatorsData.purity.value),
-    power: 7,
-    exp: 5,
-  },
-  health: {
-    value: computed(() => props.indicatorsData.health.value),
-    power: 10,
-    exp: 10,
-  },
-  fatigue: {
-    value: computed(() => props.indicatorsData.fatigue.value),
-    power: 90,
-    exp: 15,
-  },
-});
-
 const actions = [
   [
     {
       src: ball,
       alt: "Мяч",
-      increase: () => increase("happiness"),
+      increase: () => increase("happiness", 7, 5),
     },
   ],
 
@@ -124,17 +95,17 @@ const actions = [
     {
       src: kfc,
       alt: "KFC",
-      increase: () => increase("hunger"),
+      increase: () => increase("hunger", 7, 5),
     },
     {
       src: egg,
       alt: "Яичница",
-      increase: () => increase("hunger"),
+      increase: () => increase("hunger", 7, 5),
     },
     {
       src: soup,
       alt: "Борщ",
-      increase: () => increase("hunger"),
+      increase: () => increase("hunger", 7, 5),
     },
   ],
 
@@ -142,17 +113,17 @@ const actions = [
     {
       src: shampoo,
       alt: "Шампунь",
-      increase: () => increase("purity"),
+      increase: () => increase("purity", 7, 5),
     },
     {
       src: sponge,
       alt: "Мочалка",
-      increase: () => increase("purity"),
+      increase: () => increase("purity", 7, 5),
     },
     {
       src: mask,
       alt: "Маска для лица",
-      increase: () => increase("purity"),
+      increase: () => increase("purity", 7, 5),
     },
   ],
 
@@ -160,7 +131,7 @@ const actions = [
     {
       src: heal,
       alt: "Лечение",
-      increase: () => increase("health"),
+      increase: () => increase("health", 10, 10),
     },
   ],
 
@@ -168,7 +139,7 @@ const actions = [
     {
       src: bed,
       alt: "Сон",
-      increase: () => increase("fatigue"),
+      increase: () => increase("fatigue", 90, 15),
     },
   ],
 ];

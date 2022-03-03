@@ -7,7 +7,7 @@ const loading = useLoadingStore();
 
 <template>
   <the-loading v-if="loading.loading" />
-  <router-view />
+  <router-view v-show="!loading.loading" />
 </template>
 
 <style>
