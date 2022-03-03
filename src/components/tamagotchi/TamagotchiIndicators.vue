@@ -3,6 +3,7 @@ import { computed, reactive } from "vue";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/main";
 import { useLogsStore } from "@/stores/logs";
+import { getAmountOfHoursFromYearStart } from "@/js/api";
 
 const logs = useLogsStore();
 
@@ -15,7 +16,13 @@ let props = defineProps({
     type: Object,
     required: true,
   },
+  regDate: {
+    type: Number,
+    required: true,
+  },
 });
+
+let hours = computed(() => getAmountOfHoursFromYearStart() - props.regDate);
 
 let experience = computed(() => {
   let limit = 100;
@@ -121,25 +128,29 @@ for (let indicator in indicators) {
     <div class="level-wrap">
       <div class="level">{{ experience.level }}</div>
       <div class="text-and-progress">
-        <p>Опыт питомца</p>
+        <p>Опыт</p>
         <progress
           :max="experience.limit"
           :value="experience.value"
           class="progresses level-ind"
         ></progress>
       </div>
+      <div class="lifeTime">Время жизни: {{ hours }} часов</div>
     </div>
 
     <div class="stats">
       <div
         v-for="indicator in indicators"
         :key="indicator.title"
-        class="text-and-progress">
+        class="text-and-progress"
+      >
         <p>{{ indicator.title }}</p>
-        <progress :value="indicator.value" max="100"
-                  :class="[indicator.titleEng]"
-                   class="progresses"></progress>
-
+        <progress
+          :class="[indicator.titleEng]"
+          :value="indicator.value"
+          class="progresses"
+          max="100"
+        ></progress>
       </div>
     </div>
   </div>
@@ -153,7 +164,11 @@ for (let indicator in indicators) {
   justify-content: space-between;
   /*background-color: rgb(112, 146, 190);*/
   padding: 10px 5%;
-  background: linear-gradient(to bottom,rgb(112, 146, 190) 20%,rgb(153,217,234));
+  background: linear-gradient(
+    to bottom,
+    rgb(112, 146, 190) 20%,
+    rgb(153, 217, 234)
+  );
 }
 
 .level-wrap {
@@ -201,10 +216,9 @@ for (let indicator in indicators) {
   }
 }
 
-
 .progresses::-webkit-progress-bar {
   border-radius: 10px;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   overflow: hidden;
 }
 
@@ -213,28 +227,27 @@ for (let indicator in indicators) {
 }
 
 .health::-webkit-progress-value {
-  background: #DC143C;
+  background: #dc143c;
   border-radius: 10px;
 }
 
 .purity::-webkit-progress-value {
-  background: #4169E1;
+  background: #4169e1;
   border-radius: 10px;
 }
 
 .hunger::-webkit-progress-value {
-  background:#FF8C00;
+  background: #ff8c00;
   border-radius: 10px;
 }
 
 .happiness::-webkit-progress-value {
-  background: #FFFF00;
+  background: #ffff00;
   border-radius: 10px;
 }
 
 .fatigue::-webkit-progress-value {
-  background: #D2B48C;
+  background: #d2b48c;
   border-radius: 10px;
 }
-
 </style>

@@ -50,6 +50,7 @@ onMounted(() => loadData());
       v-if="userData.persChoice && userData.indicators"
       :experience="userData.experience"
       :indicatorsData="userData.indicators"
+      :regDate="userData.regDate"
       class="indicators"
     />
 
