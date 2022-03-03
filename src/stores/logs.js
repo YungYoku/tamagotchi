@@ -8,6 +8,7 @@ import { useLoadingStore } from "@/stores/loading";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/main";
 import router from "@/router";
+import { getRegDate } from "@/js/api";
 
 export const useLogsStore = defineStore({
   id: "logs",
@@ -76,7 +77,7 @@ export const useLogsStore = defineStore({
                 lastIncrease: 0,
               },
             },
-            regDate: 0,
+            regDate: getRegDate(),
           });
           await router.push("/");
           loading.hide();

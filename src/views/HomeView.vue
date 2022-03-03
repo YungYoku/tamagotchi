@@ -50,7 +50,7 @@ onMounted(() => loadData());
 
     <tamagotchi-info
       v-if="userData.persChoice"
-      :experience="userData.experience"
+      :regDate="userData.regDate"
       class="info"
     />
   </div>

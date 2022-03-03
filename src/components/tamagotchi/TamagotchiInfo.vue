@@ -1,8 +1,20 @@
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { getAmountOfHoursFromYearStart } from "@/js/api";
+
+const props = defineProps({
+  regDate: {
+    type: Number,
+    required: true,
+  },
+});
+
+let hours = computed(() => getAmountOfHoursFromYearStart() - props.regDate);
+</script>
 
 <template>
   <div class="data-panel">
-    <p>Время жизни: 0 часов</p>
+    <p>Время жизни: {{ hours }} часов</p>
   </div>
 </template>
 
