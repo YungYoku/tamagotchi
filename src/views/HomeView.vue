@@ -7,7 +7,7 @@ import TamagotchiChoice from "@/components/tamagotchi/TamagotchiChoice.vue";
 import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.vue";
 import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
 import TamagotchiPerson from "@/components/tamagotchi/TamagotchiPerson.vue";
-import { useLoadingStore } from "../stores/loading";
+import { useLoadingStore } from "@/stores/loading";
 
 const loading = useLoadingStore();
 const logs = useLogsStore();

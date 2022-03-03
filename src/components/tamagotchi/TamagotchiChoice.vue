@@ -9,8 +9,8 @@ import "swiper/css/navigation";
 
 import { Navigation } from "swiper";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../main";
-import { useLogsStore } from "../../stores/logs";
+import { db } from "@/main";
+import { useLogsStore } from "@/stores/logs";
 
 const modules = [Navigation];
 

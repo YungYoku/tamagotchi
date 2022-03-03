@@ -1,8 +1,8 @@
 <script setup>
 import { computed, reactive } from "vue";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../main";
-import { useLogsStore } from "../../stores/logs";
+import { db } from "@/main";
+import { useLogsStore } from "@/stores/logs";
 
 const logs = useLogsStore();
 

@@ -12,8 +12,8 @@ import mask from "@/assets/img/mask.png";
 import bed from "@/assets/img/bed.png";
 import ball from "@/assets/img/ball.png";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../main";
-import { useLogsStore } from "../../stores/logs";
+import { db } from "@/main";
+import { useLogsStore } from "@/stores/logs";
 
 const logs = useLogsStore();
 

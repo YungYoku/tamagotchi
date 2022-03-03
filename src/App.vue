@@ -1,6 +1,6 @@
 <script setup>
-import TheLoading from "./components/TheLoading.vue";
-import { useLoadingStore } from "./stores/loading";
+import TheLoading from "@/components/TheLoading.vue";
+import { useLoadingStore } from "@/stores/loading";
 
 const loading = useLoadingStore();
 </script>
