@@ -41,6 +41,7 @@ let experience = computed(() => {
 const indicators = reactive({
   happiness: {
     title: "Счастье",
+    titleEng: "happiness",
     value: computed(() => props.indicatorsData.happiness.value),
     decrease: 1,
     speed: 2000,
@@ -48,6 +49,7 @@ const indicators = reactive({
 
   hunger: {
     title: "Голод",
+    titleEng: "hunger",
     value: computed(() => props.indicatorsData.hunger.value),
     decrease: 1,
     speed: 2000,
@@ -55,6 +57,7 @@ const indicators = reactive({
 
   purity: {
     title: "Чистота",
+    titleEng: "purity",
     value: computed(() => props.indicatorsData.purity.value),
     decrease: 1,
     speed: 4000,
@@ -62,6 +65,7 @@ const indicators = reactive({
 
   health: {
     title: "Здоровье",
+    titleEng: "health",
     value: computed(() => props.indicatorsData.health.value),
     decrease: 1,
     speed: 3000,
@@ -69,6 +73,7 @@ const indicators = reactive({
 
   fatigue: {
     title: "Усталось",
+    titleEng: "fatigue",
     value: computed(() => props.indicatorsData.fatigue.value),
     decrease: 1,
     speed: 6000,
@@ -120,7 +125,7 @@ for (let indicator in indicators) {
         <progress
           :max="experience.limit"
           :value="experience.value"
-          class=""
+          class="progresses level-ind"
         ></progress>
       </div>
     </div>
@@ -129,10 +134,12 @@ for (let indicator in indicators) {
       <div
         v-for="indicator in indicators"
         :key="indicator.title"
-        class="text-and-progress"
-      >
+        class="text-and-progress">
         <p>{{ indicator.title }}</p>
-        <progress :value="indicator.value" max="100"></progress>
+        <progress :value="indicator.value" max="100"
+                  :class="[indicator.titleEng]"
+                   class="progresses"></progress>
+
       </div>
     </div>
   </div>
@@ -144,8 +151,9 @@ for (let indicator in indicators) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(112, 146, 190);
+  /*background-color: rgb(112, 146, 190);*/
   padding: 10px 5%;
+  background: linear-gradient(to bottom,rgb(112, 146, 190) 20%,rgb(153,217,234));
 }
 
 .level-wrap {
@@ -179,4 +187,54 @@ for (let indicator in indicators) {
   flex-direction: column;
   margin-right: 20px;
 }
+
+.level-ind::-webkit-progress-value {
+  background: gold;
+  animation: background 3s infinite alternate;
+  box-shadow: 0 -20px 10px -12px lawngreen inset;
+}
+
+@keyframes background {
+  50% {
+    background: skyblue;
+    box-shadow: 0 0 0 0 yellowgreen inset;
+  }
+}
+
+
+.progresses::-webkit-progress-bar {
+  border-radius: 10px;
+  background-color: #C0C0C0;
+  overflow: hidden;
+}
+
+.progresses::-webkit-progress-value {
+  border-radius: 10px;
+}
+
+.health::-webkit-progress-value {
+  background: #DC143C;
+  border-radius: 10px;
+}
+
+.purity::-webkit-progress-value {
+  background: #4169E1;
+  border-radius: 10px;
+}
+
+.hunger::-webkit-progress-value {
+  background:#FF8C00;
+  border-radius: 10px;
+}
+
+.happiness::-webkit-progress-value {
+  background: #FFFF00;
+  border-radius: 10px;
+}
+
+.fatigue::-webkit-progress-value {
+  background: #D2B48C;
+  border-radius: 10px;
+}
+
 </style>
