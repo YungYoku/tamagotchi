@@ -88,42 +88,49 @@ const actions = [
       src: ball,
       alt: "Мяч",
       increase: () => increase("happiness", 7, 5),
+      cost: 0,
     },
   ],
 
   [
-    {
-      src: kfc,
-      alt: "KFC",
-      increase: () => increase("hunger", 7, 5),
-    },
     {
       src: egg,
       alt: "Яичница",
       increase: () => increase("hunger", 7, 5),
+      cost: 0,
     },
     {
       src: soup,
       alt: "Борщ",
-      increase: () => increase("hunger", 7, 5),
+      increase: () => increase("hunger", 12, 8),
+      cost: 5,
+    },
+    {
+      src: kfc,
+      alt: "KFC",
+      increase: () => increase("hunger", 20, 13),
+      cost: 11,
     },
   ],
 
   [
     {
-      src: shampoo,
-      alt: "Шампунь",
-      increase: () => increase("purity", 7, 5),
-    },
-    {
       src: sponge,
       alt: "Мочалка",
       increase: () => increase("purity", 7, 5),
+      cost: 0,
+    },
+    {
+      src: shampoo,
+      alt: "Шампунь",
+      increase: () => increase("purity", 12, 8),
+      cost: 5,
     },
     {
       src: mask,
       alt: "Маска для лица",
-      increase: () => increase("purity", 7, 5),
+      increase: () => increase("purity", 20, 13),
+      cost: 11,
     },
   ],
 
@@ -132,6 +139,7 @@ const actions = [
       src: heal,
       alt: "Лечение",
       increase: () => increase("health", 10, 10),
+      cost: 0,
     },
   ],
 
@@ -140,6 +148,7 @@ const actions = [
       src: bed,
       alt: "Сон",
       increase: () => increase("fatigue", 90, 15),
+      cost: 0,
     },
   ],
 ];

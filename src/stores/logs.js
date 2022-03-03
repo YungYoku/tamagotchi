@@ -76,6 +76,7 @@ export const useLogsStore = defineStore({
                 lastIncrease: 0,
               },
             },
+            regDate: 0,
           });
           await router.push("/");
           loading.hide();

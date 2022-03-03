@@ -42,32 +42,36 @@ const indicators = reactive({
   happiness: {
     title: "Счастье",
     value: computed(() => props.indicatorsData.happiness.value),
-    decrease: 10,
-    speed: 20000,
+    decrease: 1,
+    speed: 2000,
   },
+
   hunger: {
     title: "Голод",
     value: computed(() => props.indicatorsData.hunger.value),
-    decrease: 10,
-    speed: 20000,
+    decrease: 1,
+    speed: 2000,
   },
+
   purity: {
     title: "Чистота",
     value: computed(() => props.indicatorsData.purity.value),
-    decrease: 10,
-    speed: 40000,
+    decrease: 1,
+    speed: 4000,
   },
+
   health: {
     title: "Здоровье",
     value: computed(() => props.indicatorsData.health.value),
-    decrease: 10,
-    speed: 30000,
+    decrease: 1,
+    speed: 3000,
   },
+
   fatigue: {
     title: "Усталось",
     value: computed(() => props.indicatorsData.fatigue.value),
-    decrease: 10,
-    speed: 60000,
+    decrease: 1,
+    speed: 6000,
   },
 });
 
@@ -84,6 +88,8 @@ for (let indicator in indicators) {
     }
   }, indicators[indicator].speed);
 }
+
+//Health -- when only one <50%
 </script>
 
 <template>
