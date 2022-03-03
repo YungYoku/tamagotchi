@@ -5,7 +5,7 @@ import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "@/main";
 import TamagotchiChoice from "@/components/tamagotchi/TamagotchiChoice.vue";
 import TamagotchiIndicators from "@/components/tamagotchi/TamagotchiIndicators.vue";
-import TamagotchiInfo from "@/components/tamagotchi/TamagotchiInfo.vue";
+import TamagotchiButtons from "@/components/tamagotchi/TamagotchiButtons.vue";
 import TamagotchiPerson from "@/components/tamagotchi/TamagotchiPerson.vue";
 import { useLoadingStore } from "@/stores/loading";
 import { getAmountOfDaysFromYearStart } from "@/js/api";
@@ -56,17 +56,16 @@ onMounted(() => loadData());
 
     <tamagotchi-person
       v-if="userData.persChoice"
-      :experience="userData.experience"
       :index="userData.persChoice"
-      :indicatorsData="userData.indicators"
       class="person"
     />
 
     <tamagotchi-choice v-if="!userData.persChoice" class="choice" />
 
-    <tamagotchi-info
+    <tamagotchi-buttons
       v-if="userData.persChoice"
-      :regDate="userData.regDate"
+      :experience="userData.experience"
+      :indicatorsData="userData.indicators"
       class="info"
     />
   </div>
@@ -76,7 +75,7 @@ onMounted(() => loadData());
 .home {
   background-color: rgb(153, 217, 234);
   display: grid;
-  grid-template: 80px auto 40px / 1fr;
+  grid-template: 80px auto 200px / 1fr;
   width: 100%;
   height: 100vh;
   user-select: none;
