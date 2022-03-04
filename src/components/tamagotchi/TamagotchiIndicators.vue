@@ -20,6 +20,10 @@ let props = defineProps({
     type: Number,
     required: true,
   },
+  coins: {
+    type: Number,
+    required: true,
+  },
 });
 
 let hours = computed(() => getAmountOfHoursFromYearStart() - props.regDate);
@@ -136,6 +140,10 @@ for (let indicator in indicators) {
         ></progress>
       </div>
       <div class="lifeTime">Время жизни: {{ hours }} часов</div>
+      <div class="coins">
+        <img alt="" class="coin" src="../../assets/img/coin.png" />
+        {{ props.coins }}
+      </div>
     </div>
 
     <div class="stats">
@@ -249,5 +257,16 @@ for (let indicator in indicators) {
 .fatigue::-webkit-progress-value {
   background: #d2b48c;
   border-radius: 10px;
+}
+
+.coins {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coin {
+  height: 20px;
+  margin: 0 5px 0 20px;
 }
 </style>

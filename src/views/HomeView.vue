@@ -19,6 +19,7 @@ function createEverydayPrize() {
   if (getAmountOfDaysFromYearStart() > userData.value.lastLogin) {
     updateDoc(doc(db, "users", logs.uid), {
       experience: userData.value.experience + 20,
+      coins: userData.value.coins + 1000,
       lastLogin: getAmountOfDaysFromYearStart(),
     });
   }
@@ -48,6 +49,7 @@ onMounted(() => loadData());
   <div class="home">
     <tamagotchi-indicators
       v-if="userData.persChoice && userData.indicators"
+      :coins="userData.coins"
       :experience="userData.experience"
       :indicatorsData="userData.indicators"
       :regDate="userData.regDate"
@@ -64,6 +66,7 @@ onMounted(() => loadData());
 
     <tamagotchi-buttons
       v-if="userData.persChoice"
+      :coins="userData.coins"
       :experience="userData.experience"
       :indicatorsData="userData.indicators"
       class="info"
