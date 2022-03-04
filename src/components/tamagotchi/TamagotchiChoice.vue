@@ -11,6 +11,10 @@ import { Navigation } from "swiper";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/main";
 import { useLogsStore } from "@/stores/logs";
+import {
+  getAmountOfHoursFromYearStart,
+  getAmountOfDaysFromYearStart,
+} from "@/js/api";
 
 const modules = [Navigation];
 
@@ -34,6 +38,32 @@ const tamagotchis = [
 function pick(i) {
   updateDoc(doc(db, "users", logs.uid), {
     persChoice: i,
+    experience: 0,
+    indicators: {
+      happiness: {
+        value: 100,
+        lastIncrease: 0,
+      },
+      hunger: {
+        value: 100,
+        lastIncrease: 0,
+      },
+      purity: {
+        value: 100,
+        lastIncrease: 0,
+      },
+      health: {
+        value: 100,
+        lastIncrease: 0,
+      },
+      fatigue: {
+        value: 100,
+        lastIncrease: 0,
+      },
+    },
+    regDate: getAmountOfHoursFromYearStart(),
+    lastLogin: getAmountOfDaysFromYearStart(),
+    coins: 1000,
   });
 }
 </script>

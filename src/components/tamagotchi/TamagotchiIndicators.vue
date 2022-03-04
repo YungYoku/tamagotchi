@@ -55,7 +55,7 @@ const indicators = reactive({
     titleEng: "happiness",
     value: computed(() => props.indicatorsData.happiness.value),
     decrease: 1,
-    speed: 2000,
+    speed: 1500,
   },
 
   hunger: {
@@ -102,8 +102,11 @@ function decreaseIndicator(indicator) {
 }
 
 for (let indicator in indicators) {
-  setInterval(() => {
+  const interval = setInterval(() => {
     if (props.indicatorsData[indicator].value > 0) {
+      if (props.indicatorsData.health.value === 0) {
+        clearInterval(interval);
+      }
       let flag = false;
       if (indicator === "health") {
         for (let indicator in props.indicatorsData) {
