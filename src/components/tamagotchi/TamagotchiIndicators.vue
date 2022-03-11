@@ -183,6 +183,7 @@ for (let indicator in indicators) {
 }
 
 .level-wrap {
+  width: 50%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -202,6 +203,7 @@ for (let indicator in indicators) {
 }
 
 .stats {
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -225,6 +227,10 @@ for (let indicator in indicators) {
     background: skyblue;
     box-shadow: 0 0 0 0 yellowgreen inset;
   }
+}
+
+.progresses {
+  width: 100px;
 }
 
 .progresses::-webkit-progress-bar {
@@ -271,5 +277,20 @@ for (let indicator in indicators) {
 .coin {
   height: 20px;
   margin: 0 5px 0 20px;
+}
+
+@media (max-width: 1400px) {
+  .indicators {
+    flex-wrap: wrap;
+  }
+
+  .level-wrap,
+  .stats {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .stats {
+  }
 }
 </style>

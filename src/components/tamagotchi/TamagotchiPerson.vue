@@ -42,4 +42,10 @@ const tamagotchis = [
   justify-content: center;
   flex-direction: column;
 }
+
+@media (max-width: 1400px) {
+  .person img {
+    max-height: 80%;
+  }
+}
 </style>

@@ -88,4 +88,10 @@ onMounted(() => loadData());
   height: 100vh;
   user-select: none;
 }
+
+@media (max-width: 1400px) {
+  .home {
+    grid-template: 120px auto 220px / 1fr;
+  }
+}
 </style>

@@ -152,12 +152,18 @@ const actions = [
 
 .actions > div button {
   width: 60px;
-  height: 60px;
+  height: 80px;
   margin: 0 15px;
 }
 
 .actions > div button img {
   width: 60px;
   height: 60px;
+}
+
+@media (max-width: 1400px) {
+  .actions {
+    flex-wrap: wrap;
+  }
 }
 </style>
