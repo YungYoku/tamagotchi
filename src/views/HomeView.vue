@@ -10,6 +10,7 @@ import TamagotchiPerson from "@/components/tamagotchi/TamagotchiPerson.vue";
 import { useLoadingStore } from "@/stores/loading";
 import { getAmountOfDaysFromYearStart } from "@/js/api";
 import TamagotchiDeath from "@/components/tamagotchi/TamagotchiDeath.vue";
+import TheTip from "@/components/TheTip.vue";
 
 const loading = useLoadingStore();
 const logs = useLogsStore();
@@ -76,6 +77,8 @@ onMounted(() => loadData());
     <tamagotchi-death
       v-if="userData.persChoice && !userData.indicators.health.value"
     />
+
+    <the-tip v-if="userData.persChoice" />
   </div>
 </template>
 

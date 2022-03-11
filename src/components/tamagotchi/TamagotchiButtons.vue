@@ -12,6 +12,7 @@ import bed from "@/assets/img/bed.png";
 import ball from "@/assets/img/ball.png";
 import { useLogsStore } from "@/stores/logs";
 import { getAmountOfSecondsFromYearStart } from "@/js/api";
+import { useErrorStore } from "../../stores/error";
 
 const props = defineProps({
   experience: {
@@ -29,28 +30,46 @@ const props = defineProps({
 });
 
 const logs = useLogsStore();
+const error = useErrorStore();
+
+const decay = {
+  fatigue: 450,
+  happiness: 20,
+  health: 20,
+  hunger: 10,
+  purity: 15,
+};
 
 function increase(indicator, value, exp, cost = 0) {
   if (
     props.indicatorsData.hasOwnProperty(indicator) &&
     props.indicatorsData[indicator].value < 100 &&
-    props.coins - cost > 0 &&
-    getAmountOfSecondsFromYearStart() >
-      props.indicatorsData[indicator].lastIncrease + 20
+    props.coins - cost > 0
   ) {
-    const temp = props.indicatorsData;
-    temp[indicator].value += value;
-    if (temp[indicator].value > 100) temp[indicator].value = 100;
-    temp[indicator].lastIncrease = getAmountOfSecondsFromYearStart();
+    if (
+      getAmountOfSecondsFromYearStart() <
+      props.indicatorsData[indicator].lastIncrease + decay[indicator]
+    ) {
+      const remainingTime =
+        props.indicatorsData[indicator].lastIncrease +
+        decay[indicator] -
+        getAmountOfSecondsFromYearStart();
+      error.set("Осталось " + remainingTime + " секунд");
+    } else {
+      const temp = props.indicatorsData;
+      temp[indicator].value += value;
+      if (temp[indicator].value > 100) temp[indicator].value = 100;
+      temp[indicator].lastIncrease = getAmountOfSecondsFromYearStart();
 
-    const experience = props.experience + exp;
-    const coins = props.coins - cost < 0 ? props.coins : props.coins - cost;
+      const experience = props.experience + exp;
+      const coins = props.coins - cost < 0 ? props.coins : props.coins - cost;
 
-    updateDoc(doc(db, "users", logs.uid), {
-      experience,
-      coins,
-      indicators: temp,
-    });
+      updateDoc(doc(db, "users", logs.uid), {
+        experience,
+        coins,
+        indicators: temp,
+      });
+    }
   }
 }
 
