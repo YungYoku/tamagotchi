@@ -1,7 +1,6 @@
 <script setup>
 import { db } from "@/main";
 import { doc, updateDoc } from "firebase/firestore";
-import { getCurrentDate } from "@/js/api";
 import heal from "@/assets/img/heal.png";
 import kfc from "@/assets/img/kfc.png";
 import egg from "@/assets/img/egg.png";
@@ -11,6 +10,8 @@ import sponge from "@/assets/img/sponge.png";
 import mask from "@/assets/img/mask.png";
 import bed from "@/assets/img/bed.png";
 import ball from "@/assets/img/ball.png";
+import { useLogsStore } from "@/stores/logs";
+import { getAmountOfSecondsFromYearStart } from "@/js/api";
 
 const props = defineProps({
   experience: {
@@ -27,20 +28,20 @@ const props = defineProps({
   },
 });
 
-import { useLogsStore } from "@/stores/logs";
-
 const logs = useLogsStore();
 
 function increase(indicator, value, exp, cost = 0) {
   if (
     props.indicatorsData.hasOwnProperty(indicator) &&
     props.indicatorsData[indicator].value < 100 &&
-    props.coins - cost > 0
+    props.coins - cost > 0 &&
+    getAmountOfSecondsFromYearStart() >
+      props.indicatorsData[indicator].lastIncrease + 20
   ) {
     const temp = props.indicatorsData;
     temp[indicator].value += value;
     if (temp[indicator].value > 100) temp[indicator].value = 100;
-    temp[indicator].lastIncrease = getCurrentDate();
+    temp[indicator].lastIncrease = getAmountOfSecondsFromYearStart();
 
     const experience = props.experience + exp;
     const coins = props.coins - cost < 0 ? props.coins : props.coins - cost;

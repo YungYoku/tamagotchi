@@ -28,3 +28,11 @@ export function getAmountOfDaysFromYearStart() {
 export function getAmountOfHoursFromYearStart() {
   return getAmountOfDaysFromYearStart() * 24 + new Date().getUTCHours();
 }
+
+function getAmountOfMinutesFromYearStart() {
+  return getAmountOfHoursFromYearStart() * 60 + new Date().getUTCMinutes();
+}
+
+export function getAmountOfSecondsFromYearStart() {
+  return getAmountOfMinutesFromYearStart() * 60 + new Date().getUTCSeconds();
+}
