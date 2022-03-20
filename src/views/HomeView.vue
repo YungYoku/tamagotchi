@@ -84,7 +84,6 @@ onMounted(() => loadData());
 
 <style scoped>
 .home {
-  background-color: rgb(153, 217, 234);
   display: grid;
   grid-template: 80px auto 200px / 1fr;
   width: 100%;

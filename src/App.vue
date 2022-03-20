@@ -12,4 +12,8 @@ const loading = useLoadingStore();
 
 <style>
 @import "@/assets/base.css";
+
+#app {
+  isolation: isolate;
+}
 </style>
