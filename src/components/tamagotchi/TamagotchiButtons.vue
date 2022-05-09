@@ -153,10 +153,17 @@ const actions = [
 
 <style scoped>
 .actions {
+  width: 100%;
   height: 100%;
+  max-height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(
+    to top,
+    rgb(200, 191, 231) 20%,
+    rgb(153, 217, 234)
+  );
 }
 
 .actions > p {
@@ -167,13 +174,17 @@ const actions = [
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   margin: 0 50px;
 }
 
 .actions > div button {
-  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80px;
   height: 80px;
-  margin: 0 15px;
 }
 
 .actions > div button img {
@@ -184,6 +195,13 @@ const actions = [
 @media (max-width: 1400px) {
   .actions {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 800px) {
+  .actions > div button img {
+    width: 40px;
+    height: 40px;
   }
 }
 </style>

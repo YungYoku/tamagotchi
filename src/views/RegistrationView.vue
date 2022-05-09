@@ -140,10 +140,10 @@ h2 {
 }
 
 .submitBtn {
-  padding: 15px 0;
+  padding: 10px 0;
   background-color: #9966cc;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   color: white;
   font-size: 24px;
   font-weight: 400;

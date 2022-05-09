@@ -84,16 +84,13 @@ onMounted(() => loadData());
 
 <style scoped>
 .home {
-  display: grid;
-  grid-template: 80px auto 200px / 1fr;
   width: 100%;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   user-select: none;
-}
-
-@media (max-width: 1400px) {
-  .home {
-    grid-template: 120px auto 220px / 1fr;
-  }
+  gap: 40px;
 }
 </style>

@@ -169,7 +169,7 @@ for (let indicator in indicators) {
 
 <style scoped>
 .indicators {
-  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -282,15 +282,16 @@ for (let indicator in indicators) {
 @media (max-width: 1400px) {
   .indicators {
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .level-wrap,
   .stats {
     width: 100%;
-    margin-top: 20px;
   }
 
   .stats {
+    margin-top: 20px;
   }
 }
 </style>

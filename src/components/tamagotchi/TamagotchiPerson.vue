@@ -37,15 +37,35 @@ const tamagotchis = [
 
 <style scoped>
 .person {
+  height: 100%;
+  max-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
+.person img {
+  height: 100%;
+}
+
 @media (max-width: 1400px) {
-  .person img {
-    max-height: 80%;
+  .person {
+    height: 80%;
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .person {
+    height: 60%;
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 800px) {
+  .person {
+    height: 50%;
   }
 }
 </style>
