@@ -4,6 +4,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/main";
 import { useLogsStore } from "@/stores/logs";
 import { getAmountOfHoursFromYearStart } from "@/js/api";
+import TamagotchiLogout from "@/components/tamagotchi/TamagotchiLogout.vue";
 
 const logs = useLogsStore();
 
@@ -164,6 +165,8 @@ for (let indicator in indicators) {
         ></progress>
       </div>
     </div>
+
+    <tamagotchi-logout class="logout" />
   </div>
 </template>
 
@@ -173,13 +176,13 @@ for (let indicator in indicators) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /*background-color: rgb(112, 146, 190);*/
   padding: 10px 5%;
   background: linear-gradient(
     to bottom,
     rgb(112, 146, 190) 20%,
     rgb(153, 217, 234)
   );
+  position: relative;
 }
 
 .level-wrap {
@@ -277,6 +280,12 @@ for (let indicator in indicators) {
 .coin {
   height: 20px;
   margin: 0 5px 0 20px;
+}
+
+.logout {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 @media (max-width: 1400px) {

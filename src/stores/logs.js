@@ -9,8 +9,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/main";
 import router from "@/router";
 import {
-  getAmountOfHoursFromYearStart,
   getAmountOfDaysFromYearStart,
+  getAmountOfHoursFromYearStart,
 } from "@/js/api";
 
 export const useLogsStore = defineStore({
@@ -91,6 +91,12 @@ export const useLogsStore = defineStore({
           loading.hide();
         }
       );
+    },
+
+    logout() {
+      this.$reset();
+      localStorage.clear();
+      router.push("/login");
     },
   },
 });
